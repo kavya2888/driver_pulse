@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
-from genai_feedback import generate_driver_feedback
+
 from flagging_system import detect_motion_events
 from audio_analysis import detect_audio_events
-
 
 class UberAnalyticsEngine:
     def generate_outputs(self, data):
@@ -117,7 +116,6 @@ class UberAnalyticsEngine:
 
         summaries["is_on_track"] = summaries["is_on_track"].fillna(False)
         summaries["pace_delta"] = summaries["pace_delta"].fillna(0)
-        
 
         # ── ML Feature Columns ──────────────────
 
@@ -141,9 +139,6 @@ class UberAnalyticsEngine:
 
         # ── ML Label ────────────────────────────
         summaries["goal_on_track"] = (summaries["velocity_delta"] >= -50).astype(int)
-        summaries["ai_feedback"] = summaries.apply(
-        generate_driver_feedback,
-        axis=1
-        )
+
 
         return flags, summaries
