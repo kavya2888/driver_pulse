@@ -7,7 +7,7 @@ This document serves as an **engineering handoff** describing system structure, 
 ---
 
 ## 🔗 Quick Links
-* **Live Application:** [[https://driverpulse-4aejjfcnu7x2fhwt42fe2b.streamlit.app/]]
+* **Live Application:** [[https://driverpulse-pggfocbhbiew2oddpf5v7r.streamlit.app/]]
 * **Demo Video:** [[Insert YouTube / Google Drive Link]]
 
 ### 🔑 Judge Login Credentials
