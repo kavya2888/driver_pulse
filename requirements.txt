@@ -2,7 +2,7 @@ pandas
 numpy
 plotly
 scipy
-streamlit
+streamlit>=1.32
 joblib
 scikit-learn
 xgboost
