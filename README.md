@@ -161,17 +161,3 @@ XGBoost was selected because it performs well on structured tabular data while m
 
 ---
 
-# Repository Structure
-driver_pulse
-├── src ├── ingestion.py
-│   ├── engine.py
-│   ├── motion_analysis.py
-│   ├── audio_analysis.py
-│   ├── app.py
-│   └── streamlit_app.py
-├── data
-├── processed_outputs 
-├── requirements.txt
-├── progress_log.md
-├── design_doc.pdf
-└── system_architecture  
