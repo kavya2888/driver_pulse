@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from motion_analysis import detect_motion_events
+from flagging_system import detect_motion_events
 from audio_analysis import detect_audio_events
 
 
@@ -140,5 +140,6 @@ class UberAnalyticsEngine:
 
         # ── ML Label ────────────────────────────
         summaries["goal_on_track"] = (summaries["velocity_delta"] >= -50).astype(int)
+
 
         return flags, summaries
