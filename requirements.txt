@@ -7,3 +7,5 @@ joblib
 scikit-learn
 xgboost
 altair<5
+google-generativeai
+python-dotenv

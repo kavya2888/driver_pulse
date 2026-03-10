@@ -239,11 +239,22 @@ else:
         st.write("No safety flags recorded.")
 
     # Driving Tips
-    st.markdown("<div class='section-title'> Driving Tips </div>", unsafe_allow_html=True)
-    tips_list = ["Avoid sudden braking", "Maintain smooth acceleration", "Reduce loud cabin noise"]
-    for tip in tips_list:
-        st.markdown(f"<div class='tip-card'>{tip}</div>", unsafe_allow_html=True)
-        
+    st.markdown("<div class='section-title'> AI Driver Insight </div>", unsafe_allow_html=True)
+
+    if not driver_summary.empty and "ai_feedback" in driver_summary.columns:
+
+        latest_feedback = driver_summary.iloc[-1]["ai_feedback"]
+
+        st.markdown(
+            f"<div class='tip-card'>🤖 {latest_feedback}</div>",
+            unsafe_allow_html=True
+        )
+
+    else:
+        st.markdown(
+            "<div class='tip-card'>No AI feedback available yet.</div>",
+            unsafe_allow_html=True
+        )  
     # Full Trip History
     st.markdown("<div class='section-title'>Trips Summary</div>", unsafe_allow_html=True)
     with st.expander("📜 Full Trip History", expanded=True):
