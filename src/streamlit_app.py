@@ -248,5 +248,3 @@ else:
     st.markdown("<div class='section-title'>Trips Summary</div>", unsafe_allow_html=True)
     with st.expander("📜 Full Trip History", expanded=True):
         st.dataframe(driver_trips, use_container_width=True)
-        st.dataframe(driver_trips, use_container_width=True)
-
