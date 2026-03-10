@@ -1,4 +1,4 @@
-# Driver Pulse
+# Driver Pulse - Group 19
 
 Driver Pulse is an analytics system that surfaces insights about **driver safety signals and earnings progress** using telemetry data and trip records. The system processes motion and audio signals alongside trip metadata to generate interpretable analytics that help drivers understand both **driving stress signals and whether they are on pace to meet their earnings goals**.
 
