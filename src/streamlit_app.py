@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import plotly.graph_objects as go
 
-# 1. Page Configuration
+# Page Configuration
 st.set_page_config(
     page_title="Driver Pulse | Track Your Goal",
     layout="wide",
@@ -80,15 +80,16 @@ def apply_custom_styles():
 
 apply_custom_styles()
 
-# 2. Session State
+# Session State
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.driver = None
 
-# 3. Login Page
+# Login Page
 def login_page():
     _, col2, _ = st.columns([1, 1.4, 1])
     with col2:
+        # --- Added Welcome Greeting ---
         st.markdown("""
             <div style='text-align:center; margin-bottom: -20px;'>
                 <p style='color: #4facfe; font-weight: 800; letter-spacing: 1px; font-size: 0.9rem;'>
@@ -113,7 +114,7 @@ def login_page():
             else:
                 st.error("Invalid Credentials")
 
-# 4. Main App Content
+#  Main App Content
 if not st.session_state.logged_in:
     login_page()
 else:
@@ -166,7 +167,7 @@ else:
     cols = [c1, c2, c3, c4]
     for i, (label, val) in enumerate(m_data):
         cols[i].markdown(f"<div class='metric-card'><div class='metric-title'>{label}</div><div class='metric-value'>{val}</div></div>", unsafe_allow_html=True)
-
+    
     # Goal Progress
     st.markdown("<div class='section-title'> Goal Progress</div>", unsafe_allow_html=True)
 
@@ -204,23 +205,27 @@ else:
        g2.metric("Current Earnings", f"₹{total_earnings:,}")
        g3.metric("Remaining", f"₹{max(target-total_earnings, 0):,}")
 
-     # Goal Pace Status  
-     st.markdown("<div class='section-title'> Goal Pace Status</div>", unsafe_allow_html=True)
+    # Goal Pace Status  
+    st.markdown("<div class='section-title'> Goal Pace Status</div>", unsafe_allow_html=True)
 
-     if driver_goals.empty:
-        st.write("Please set a goal to see your pace analysis.")
-     elif not driver_summary.empty:
-        pace = driver_summary.iloc[-1]
-        is_on_track = pace.get("is_on_track", pace.get("goal_on_track", False))
+    if driver_goals.empty:
+       st.write("Please set a goal to see your pace analysis.")
+    elif not driver_summary.empty:
+       pace = driver_summary.iloc[-1]
+       is_on_track = pace.get("is_on_track", pace.get("goal_on_track", False))
     
-        if is_on_track:
-           if progress >= 1: st.success("🎉 Excellent! You have already exceeded your earnings goal. You still have sufficient time left.")
-           else: st.success("✅ Good Job! You are on track to meet your earnings goal. You still have sufficient time left.")
-        else:
-           if progress >= 0.6: st.warning("⚠ You are at risk of missing your earnings goal. There is not much time left to meet your goal.")
-           else: st.error("🚨 You are falling behind your earnings goal. Try completing more trips quickly.")
-      else:
-         st.write("Not enough trip data yet to calculate pace.")
+       if is_on_track:
+          if progress >= 1: 
+             st.success("🎉 Excellent! You have already exceeded your earnings goal.")
+          else: 
+            st.success("✅ Good Job! You are on track to meet your earnings goal.")
+       else:
+          if progress >= 0.6: 
+            st.warning("⚠ You are at risk of missing your goal. Very little time remains!")
+          else: 
+            st.error("🚨 You are falling behind. Consider completing more trips to catch up.")
+    else:
+        st.write("Not enough trip data yet to calculate pace.")
 
     # Safety Flags 
     st.markdown("<div class='section-title'> Trip Safety Flags</div>", unsafe_allow_html=True)
@@ -238,9 +243,10 @@ else:
     tips_list = ["Avoid sudden braking", "Maintain smooth acceleration", "Reduce loud cabin noise"]
     for tip in tips_list:
         st.markdown(f"<div class='tip-card'>{tip}</div>", unsafe_allow_html=True)
-
-    # Trip History
+        
+    # Full Trip History
     st.markdown("<div class='section-title'>Trips Summary</div>", unsafe_allow_html=True)
     with st.expander("📜 Full Trip History", expanded=True):
+        st.dataframe(driver_trips, use_container_width=True)
         st.dataframe(driver_trips, use_container_width=True)
 
