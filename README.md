@@ -8,7 +8,7 @@ This document serves as an **engineering handoff** describing system structure, 
 
 ## 🔗 Quick Links
 * **Live Application:** [[https://driverpulse-pggfocbhbiew2oddpf5v7r.streamlit.app/]]
-* **Demo Video:** [[Google Drive Link]]
+* **Demo Video:** [[https://drive.google.com/drive/folders/14lg6z9vxIwJmvezjNMkgmtvwuycOsRKa]]
 * **GitHub Repo Link:** [[https://github.com/kavya2888/driver_pulse]]
 
 ### 🔑 Judge Login Credentials
