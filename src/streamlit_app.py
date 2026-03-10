@@ -102,7 +102,7 @@ def login_page():
         
         st.markdown("<h1 style='text-align:center; letter-spacing:-2px; margin-top:0;'>DRIVER PULSE</h1>", unsafe_allow_html=True)
         
-        username = st.text_input("Driver ID", placeholder="DRV101")
+        username = st.text_input("Driver ID", placeholder="eg:DRV001")
         password = st.text_input("Password", type="password")
         
         if st.button("Authorize Login", use_container_width=True):
@@ -169,44 +169,58 @@ else:
 
     # Goal Progress
     st.markdown("<div class='section-title'> Goal Progress</div>", unsafe_allow_html=True)
-    target = driver_goals.iloc[-1]["target_earnings"] if not driver_goals.empty else 0
-    progress = min(total_earnings/target, 1) if target > 0 else 0
+
+    if driver_goals.empty :
+       st.info("No active goal found. Set a target in your profile to track your progress!")
+       st.markdown("""
+        <div style='text-align:center; padding: 50px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px dashed rgba(255,255,255,0.1);'>
+            <p style='color: #888;'>Goal data currently unavailable for this Driver ID.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+       target = driver_goals.iloc[-1]["target_earnings"]
+       progress = min(total_earnings/target, 1)
     
-    gauge = go.Figure(go.Indicator(
-        mode="gauge+number", value=progress*100,
-        number={'suffix': "%", 'font': {'color': 'white', 'size': 50}},
-        gauge={
+       gauge = go.Figure(go.Indicator(
+          mode="gauge+number", value=progress*100,
+          number={'suffix': "%", 'font': {'color': 'white', 'size': 50}},
+       gauge={
             'axis':{'range':[0, 100], 'tickcolor': "white"},
             'bar':{'color': "#4facfe"},
             'bgcolor': "rgba(255,255,255,0.05)",
             'steps': [{'range': [0, 100], 'color': 'rgba(255,255,255,0.01)'}]
         }
-    ))
-    gauge.update_layout(
+       ))
+       gauge.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
         plot_bgcolor='rgba(0,0,0,0)',
         height=400, 
         margin=dict(t=50, b=20, l=50, r=50)
-    )
-    st.plotly_chart(gauge, use_container_width=True)
+        )
+       st.plotly_chart(gauge, use_container_width=True)
 
-    if not driver_goals.empty:
-        g1, g2, g3 = st.columns(3)
-        g1.metric("Target Earnings", f"₹{target:,}")
-        g2.metric("Current Earnings", f"₹{total_earnings:,}")
-        g3.metric("Remaining", f"₹{max(target-total_earnings, 0):,}")
+       g1, g2, g3 = st.columns(3)
+       g1.metric("Target Earnings", f"₹{target:,}")
+       g2.metric("Current Earnings", f"₹{total_earnings:,}")
+       g3.metric("Remaining", f"₹{max(target-total_earnings, 0):,}")
 
-    # Goal Pace Status  
-    if not driver_summary.empty:
-        st.markdown("<div class='section-title'> Goal Pace Status</div>", unsafe_allow_html=True)
+     # Goal Pace Status  
+     st.markdown("<div class='section-title'> Goal Pace Status</div>", unsafe_allow_html=True)
+
+     if driver_goals.empty:
+        st.write("Please set a goal to see your pace analysis.")
+     elif not driver_summary.empty:
         pace = driver_summary.iloc[-1]
         is_on_track = pace.get("is_on_track", pace.get("goal_on_track", False))
+    
         if is_on_track:
-            if progress >= 1: st.success("🎉 Excellent! You have already exceeded your earnings goal. You still have sufficient time left.")
-            else: st.success("✅ Good Job! You are on track to meet your earnings goal. You still have sufficient time left.")
+           if progress >= 1: st.success("🎉 Excellent! You have already exceeded your earnings goal. You still have sufficient time left.")
+           else: st.success("✅ Good Job! You are on track to meet your earnings goal. You still have sufficient time left.")
         else:
-            if progress >= 0.6: st.warning("⚠ You are at risk of missing your earnings goal. There is not much time left to meet your goal.")
-            else: st.error("🚨 You are falling behind your earnings goal. Try completing more trips quickly.")
+           if progress >= 0.6: st.warning("⚠ You are at risk of missing your earnings goal. There is not much time left to meet your goal.")
+           else: st.error("🚨 You are falling behind your earnings goal. Try completing more trips quickly.")
+      else:
+         st.write("Not enough trip data yet to calculate pace.")
 
     # Safety Flags 
     st.markdown("<div class='section-title'> Trip Safety Flags</div>", unsafe_allow_html=True)
@@ -229,3 +243,4 @@ else:
     st.markdown("<div class='section-title'>Trips Summary</div>", unsafe_allow_html=True)
     with st.expander("📜 Full Trip History", expanded=True):
         st.dataframe(driver_trips, use_container_width=True)
+
