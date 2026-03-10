@@ -161,4 +161,29 @@ Driver feedback requires low-latency calculations. The analytics engine therefor
 XGBoost was selected because it performs well on structured tabular data while maintaining fast inference speeds. Logistic regression provides a lightweight fallback option.
 
 ---
+# Module Breakdown
 
+### 1. Source Code (`src/`)
+- **ingestion.py**: Handles data loading and timestamp alignment.
+- **motion_analysis.py**: Applies digital signal processing (DSP) to accelerometer data to detect motion events.
+- **audio_analysis.py**: Processes audio streams to detect safety-related auditory events.
+- **engine.py**: Fuses motion and audio signals to compute driver strain metrics.
+- **app.py**: Orchestrates the pipeline and generates processed outputs.
+- **streamlit_app.py**: Provides a Streamlit-based dashboard for visualization of driver metrics.
+
+### 2. Data Management
+- **data/**: Contains raw CSV files; read-only.
+- 
+### 3. Generated Outputs
+- **processed_outputs/**: Stores results from the analytics engine, including:
+  - `trip_summaries.csv`
+  - `flagged_moments.csv`
+
+### 4. Documentation 
+- **requirements.txt**: Lists all required Python libraries.
+- **progress_log.md**: Development milestone log.
+- **design_doc.pdf**: Full system design documentation, including algorithms.
+- **system_architecture.jpeg**: Full system design architecture diagram
+---
+
+This modular design ensures that backend processing, data management, and frontend visualization remain decoupled, making the system maintainable and scalable.
