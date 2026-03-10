@@ -173,7 +173,7 @@ XGBoost was selected because it performs well on structured tabular data while m
 
 ### 2. Data Management
 - **data/**: Contains raw CSV files; read-only.
-- 
+  
 ### 3. Generated Outputs
 - **processed_outputs/**: Stores results from the analytics engine, including:
   - `trip_summaries.csv`
