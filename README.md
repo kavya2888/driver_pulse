@@ -159,5 +159,22 @@ Driver feedback requires low-latency calculations. The analytics engine therefor
 ### Resource Efficiency
 XGBoost was selected because it performs well on structured tabular data while maintaining fast inference speeds. Logistic regression provides a lightweight fallback option.
 
-
 ---
+
+# Repository Structure
+driver_pulse
+├── src
+│   ├── ingestion.py         # Data loading & timestamp normalization
+│   ├── engine.py            # Main analytics & sensor fusion logic
+│   ├── motion_analysis.py   # Accelerometer DSP & pothole detection
+│   ├── audio_analysis.py    # Audio intensity scoring logic
+│   ├── app.py               # Main pipeline orchestration script
+│   └── streamlit_app.py     # Streamlit Dashboard UI
+├── data                     # Raw trip and sensor datasets
+├── processed_outputs
+│   ├── flagged_moments.csv  # Traceable logs of detected events
+│   └── trip_summaries.csv   # Aggregated trip-level analytics
+├── requirements.txt         # System dependencies (pandas, xgboost, etc.)
+├── progress_log.md          # Detailed development timeline
+└── design_doc.pdf           # Full technical design documentation
+└── system_architecture      # System Architecture Design
