@@ -43,7 +43,7 @@
 
 ---
 
-## 📊 Mar 9: Visualization Layer
+## Mar 9: Visualization Layer
 * **Driver Dashboard:** Built the interactive portal using **Streamlit** on a local network.
 * **Dashboard Components:**
     * **Secure Login:** Access via Driver ID (e.g., DRV001) and Password.
@@ -58,7 +58,7 @@
 
 ---
 
-## 🚀 Mar 10: Deployment & Wrap-up
+## Mar 10: Deployment & Wrap-up
 * **Full Pipeline Integration:** Merged the four core Python modules (`ingestion.py`, `engine.py`, `app.py`, and `streamlit_app.py`) into a single execution flow.
 * **Code Repository Finalization:** Uploaded all scripts, 6 raw datasets, and processed outputs to the project repository.
 * **Final Deployment:** Deployed the Streamlit dashboard as the primary interface for driver-facing analytics.
