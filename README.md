@@ -17,7 +17,7 @@ This document serves as an **engineering handoff** describing system structure, 
 | **Username** | `DRVxxx` (e.g., `DRV144`) |
 | **Password** | `Uber123` |
 
-> **Note to Judges:** The Streamlit application is hosted on a free-tier cloud instance. The first load may take **20–40 seconds** as the container wakes up.
+> **Note:** The Streamlit application is hosted on a free-tier cloud instance. The first load may take **20–40 seconds** as the container wakes up.
 
 ---
 
